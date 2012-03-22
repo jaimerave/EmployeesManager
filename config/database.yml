@@ -1,4 +1,5 @@
-postgres:
+test: &test
   adapter: postgresql
+  host: localhost
   database: test_employees_manager
   username: postgres
