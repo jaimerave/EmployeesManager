@@ -1,5 +1,16 @@
+development:
+  adapter: postgresql
+  host: localhost
+  database: development_employees_manager
+  pool: 5
+  username: jaime
+  password:
+  encoding: utf8
+
 test: &test
   adapter: postgresql
   host: localhost
   database: test_employees_manager
-  username: postgres
+  pool: 5
+  username: jaime
+  encoding: utf8
