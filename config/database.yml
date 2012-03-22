@@ -12,5 +12,5 @@ test: &test
   host: localhost
   database: test_employees_manager
   pool: 5
-  username: jaime
+  username: postgres
   encoding: utf8
