@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gem 'activeadmin'
 gem 'jquery-rails'
+gem 'pg'
 gem 'rails', '3.2.2'
-gem 'sqlite3'
 gem 'twitter'
 
 # Gems used only for assets and not required
