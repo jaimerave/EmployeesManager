@@ -17,5 +17,5 @@ test: &test
 
 postgres:
   adapter: postgresql
-  database: myapp_test
+  database: test_employees_manager
   username: postgres
