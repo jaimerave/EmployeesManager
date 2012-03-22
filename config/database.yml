@@ -3,7 +3,7 @@ development:
   host: localhost
   database: development_employees_manager
   pool: 5
-  username: postgres
+  username: jaime
   password:
   encoding: utf8
 
@@ -12,5 +12,10 @@ test: &test
   host: localhost
   database: test_employees_manager
   pool: 5
-  username: postgres
+  username: jaime
   encoding: utf8
+
+postgres:
+  adapter: postgresql
+  database: myapp_test
+  username: postgres
