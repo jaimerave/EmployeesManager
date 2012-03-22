@@ -48,14 +48,23 @@ def fixture(file)
   File.new(fixture_path + '/' + file)
 end
 
+def login_admin
+  visit root_path
+  page.should have_content("Email")
+  page.should have_content("Password")
+  fill_in "admin_user_email", with: "admin@example.com"
+  fill_in "admin_user_password", with: "password"
+  click_on "Login"
+end
+
 def stub_twitter_calls
   stub_request(:get, "https://api.twitter.com/1/users/show.json?screen_name=JaimeRave").
-    with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Twitter Ruby Gem 2.1.1'}).  
+    with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Twitter Ruby Gem 2.1.1'}).
     to_return(:status => 200, :body => fixture("user_jaimerave.json"), :headers => {})
   stub_request(:get, "https://api.twitter.com/1/users/show.json?screen_name=jaimerave").
-    with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Twitter Ruby Gem 2.1.1'}).  
+    with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Twitter Ruby Gem 2.1.1'}).
     to_return(:status => 200, :body => fixture("user_jaimerave.json"), :headers => {})
   stub_request(:get, "https://api.twitter.com/1/users/show.json?screen_name=jaimerave12345").
-    with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Twitter Ruby Gem 2.1.1'}).  
+    with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Twitter Ruby Gem 2.1.1'}).
     to_return(:status => 404, :body => fixture("user_jaimerave12345.json"), :headers => {})
 end
