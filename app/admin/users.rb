@@ -42,8 +42,8 @@ ActiveAdmin.register User do
       f.input :mobile
     end
     f.inputs "Social Networks" do
-      f.input :twitter
-      f.input :facebook
+      f.input :twitter, hint: "@your_twitter"
+      f.input :facebook, hint: "facebook.com/yourprofile"
     end
     f.buttons
   end
