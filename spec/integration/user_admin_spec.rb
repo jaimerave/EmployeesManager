@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe "Admins" do
   before do
+    AdminUser.destroy_all
     Factory(:admin_user)
     stub_twitter_calls
   end
