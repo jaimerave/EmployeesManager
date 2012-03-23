@@ -13,6 +13,9 @@ require 'capybara/rails'
 
 require 'webmock/rspec'
 
+include Warden::Test::Helpers
+Warden.test_mode!
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -38,6 +41,18 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
+  config.after(:each) { Warden.test_reset! }
+end
+
+def as_admin(user=nil, &block)
+  current_user = user || Factory.create(:admin_user)
+  if request.present?
+    sign_in(current_user)
+  else
+    login_as(current_user, :scope => :admin_user)
+  end
+  block.call if block.present?
+  return self
 end
 
 def fixture_path

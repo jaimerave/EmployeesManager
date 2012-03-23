@@ -1,7 +1,11 @@
 FactoryGirl.define do
+  sequence :email do |n|
+    "test#{n}@example.com"
+  end
+
   factory :user do
     name "Jaime Rave"
-    email "jaimerave@gmail.com"
+    email
     mobile "3003160361"
     phone "3400868"
     twitter "@JaimeRave"

@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe "Admin" do
   before do
+    AdminUser.destroy_all
     Factory(:admin_user)
-    stub_twitter_calls
   end
 
   it "should be able to login" do

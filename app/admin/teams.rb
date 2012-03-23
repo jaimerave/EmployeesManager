@@ -4,6 +4,9 @@ ActiveAdmin.register Team do
     panel "Members" do
       table_for team.team_members do
         column "Name" do |member|
+          image_tag member.user.profile_picture
+        end
+        column "Name" do |member|
           member.user.name
         end
         column "Email" do |member|
@@ -14,6 +17,11 @@ ActiveAdmin.register Team do
   end
 
   form do |f|
+    if f.object.errors.any?
+      f.inputs "Error" do
+        f.label f.object.errors.full_messages.to_sentence
+      end
+    end
     f.inputs "Details" do
       f.input :name
     end

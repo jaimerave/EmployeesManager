@@ -46,7 +46,7 @@ describe User do
   end
 
   it "should have a valid facebook" do
-    Factory.build(:user, twitter: "").should_not be_valid
-    Factory.build(:user, twitter: "pajarito.com").should_not be_valid
+    Factory.build(:user, facebook: "").should_not be_valid
+    Factory.build(:user, facebook: "pajarito.com").should_not be_valid
   end
 end
