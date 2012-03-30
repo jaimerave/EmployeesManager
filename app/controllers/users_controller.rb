@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
   #before_filter :authenticate_user!
   def show
-    @user = User.first
+    @user = current_user
   end
 
   def edit
-    @user = User.first
+    @user = current_user
   end
 
   def update
-    @user = User.first
+    @user = current_user
     if @user.update_attributes(params[:user])
       redirect_to user_path
     else
