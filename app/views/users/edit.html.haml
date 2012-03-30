@@ -1,0 +1,23 @@
+=form_for @user do |f|
+  %p
+    =f.label :name
+    =f.text_field :name
+  %p
+    =f.label :email
+    =f.text_field :email
+  %p
+    =f.label :phone
+    =f.text_field :phone
+  %p
+    =f.label :mobile
+    =f.text_field :mobile
+  %p
+    =f.label :facebook
+    =f.text_field :facebook
+  %p
+    =f.label :twitter
+    =f.text_field :twitter
+  %p
+    =f.submit
+
+=link_to "Back", :back

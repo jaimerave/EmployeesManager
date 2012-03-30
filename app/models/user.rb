@@ -1,11 +1,18 @@
 class User < ActiveRecord::Base
-  validates_presence_of :name, :mobile, :twitter, :facebook, :phone, :email
-  validates_length_of :mobile, in: 10..32
-  validates_length_of :phone, in: 7..32
-  validates :mobile, format: {with: /\+?(\d|\s)+$/}
-  validates :phone, format: {with: /\+?(\d|\s)+$/}
-  validates :email, uniqueness: true, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
-  validates :facebook, format: {with: /facebook.com\/\w+/}
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+  validates_presence_of :name, :email
+  validates_length_of :mobile, in: 10..32, allow_blank: true
+  validates_length_of :phone, in: 7..32, allow_blank: true
+  validates :mobile, format: {with: /\+?(\d|\s)+$/}, allow_blank: true
+  validates :phone, format: {with: /\+?(\d|\s)+$/}, allow_blank: true
+  validates :email, uniqueness: true, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }, allow_blank: true
+  validates :facebook, format: {with: /facebook.com\/\w+/}, allow_blank: true
   validate :valid_twitter?
 
   has_many :team_members
@@ -13,14 +20,12 @@ class User < ActiveRecord::Base
 
   before_save :set_profile_picture
 
-  devise :omniauthable
-
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token.extra.raw_info
     if user = User.where(:email => data.email).first
       user
     else # Create a user with a stub password. 
-      User.create!(:email => data.email, :password => Devise.friendly_token[0,20]) 
+      User.create!(:email => data.email, :name => data.name) 
     end
   end
 
@@ -35,15 +40,13 @@ class User < ActiveRecord::Base
   private
 
   def valid_twitter?
-    name = twitter.scan(/(\w+)$/).join
+    name = twitter.scan(/(\w+)$/).join if twitter
     if name.present?
       begin
         user = Twitter.user(name)
       rescue Exception => e
         errors.add(:twitter, "does not exists")
       end
-    else
-      errors.add(:twitter, "is invalid")
     end
   end
 
