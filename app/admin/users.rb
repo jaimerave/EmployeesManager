@@ -35,6 +35,11 @@ ActiveAdmin.register User do
   end
 
   form do |f|
+    if f.object.errors.any?
+      f.inputs "Error" do
+        f.label f.object.errors.full_messages.to_sentence
+      end
+    end
     f.inputs "Details" do
       f.input :name
       f.input :email

@@ -1,18 +1,15 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+  #devise :omniauthable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :mobile, :phone, :name, :facebook, :twitter
   validates_presence_of :name, :email, :mobile, :phone, :twitter, :facebook
-  validates_length_of :mobile, in: 10..32, allow_blank: true
-  validates_length_of :phone, in: 7..32, allow_blank: true
-  validates :mobile, format: {with: /\+?(\d|\s)+$/}, allow_blank: true
-  validates :phone, format: {with: /\+?(\d|\s)+$/}, allow_blank: true
-  validates :email, uniqueness: true, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }, allow_blank: true
-  validates :facebook, format: {with: /facebook.com\/\w+/}, allow_blank: true
+  validates_length_of :mobile, in: 10..32
+  validates_length_of :phone, in: 7..32
+  validates :mobile, format: {with: /\+?(\d|\s)+$/}
+  validates :phone, format: {with: /\+?(\d|\s)+$/}
+  validates :email, uniqueness: true, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+  validates :facebook, format: {with: /facebook.com\/\w+/}
   validate :valid_twitter?
 
   has_many :team_members
@@ -34,6 +31,10 @@ class User < ActiveRecord::Base
         user.email = data["email"]
       end
     end
+  end
+
+  def password_required?
+    false
   end
 
   private
