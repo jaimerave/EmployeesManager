@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
       signed_in_resource.update_attributes(:uid => access_token[:uid], :name => data.name, :facebook => "facebook.com/#{data.username}")
       user
     else # Create a user with a stub password.
-      User.create!(:email => data.email, :name => data.name, :password => Devise.friendly_token[0,20])
+      User.create!(:email => data.email, :name => data["name"], :password => Devise.friendly_token[0,20])
     end
   end
 
