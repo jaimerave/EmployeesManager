@@ -12,7 +12,26 @@
  *= require_tree .
 */
 
+.user_form p{
+  margin: 20px auto;
+}
+
+.user_form p label{
+  float: left;
+}
+
+.text{
+  float: right;
+  margin-right:150px;
+}
+
 .content{
   margin: 0 auto;
   width:960px;
 }
+
+.pic{
+  margin-right:600px;
+  float: right;
+}
+

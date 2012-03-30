@@ -1,22 +1,25 @@
-=image_tag @user.profile_picture
-%p
-  Name:
-  =@user.name
-%p
-  Email
-  =@user.email
-%p
-  Phone
-  =@user.phone
-%p
-  Mobile
-  =@user.mobile
-%p
-  Twitter
-  =@user.twitter
-%p
-  Facebook
-  =@user.facebook
-
-=link_to "Edit", edit_user_path
-=link_to "Logout", destroy_user_session_path, method: :delete
+%h1 Your Profile
+.pic
+  =image_tag @user.profile_picture
+.info
+  %p
+    Name:
+    =@user.name
+  %p
+    Email
+    =@user.email
+  %p
+    Phone
+    =@user.phone
+  %p
+    Mobile
+    =@user.mobile
+  %p
+    Twitter
+    =@user.twitter
+  %p
+    Facebook
+    =@user.facebook
+.links
+  =link_to "Edit", edit_user_path
+  =link_to "Logout", destroy_user_session_path, method: :delete
