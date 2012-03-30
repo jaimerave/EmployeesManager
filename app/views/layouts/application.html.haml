@@ -9,6 +9,6 @@
 %body
   .flash
     %p.notice= notice
-    %p.alert= alert
+    %p.alert= flash[:error]
   .content
     = yield

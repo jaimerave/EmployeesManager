@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  validates_presence_of :email
+  attr_accessible :email, :password, :mobile, :phone, :name, :facebook, :twitter
+  validates_presence_of :name, :email, :mobile, :phone, :twitter, :facebook
   validates_length_of :mobile, in: 10..32, allow_blank: true
   validates_length_of :phone, in: 7..32, allow_blank: true
   validates :mobile, format: {with: /\+?(\d|\s)+$/}, allow_blank: true
