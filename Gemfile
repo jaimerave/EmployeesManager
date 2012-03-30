@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'activeadmin'
+gem 'haml'
+gem 'omniauth-facebook'
 gem 'jquery-rails'
 gem 'pg'
 gem 'rails', '3.2.2'

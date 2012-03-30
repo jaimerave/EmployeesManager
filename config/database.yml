@@ -3,7 +3,7 @@ development:
   host: localhost
   database: development_employees_manager
   pool: 5
-  username: jaime
+  username: postgres
   password:
   encoding: utf8
 
