@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  validates_presence_of :name, :email
+  validates_presence_of :email
   validates_length_of :mobile, in: 10..32, allow_blank: true
   validates_length_of :phone, in: 7..32, allow_blank: true
   validates :mobile, format: {with: /\+?(\d|\s)+$/}, allow_blank: true
@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
       signed_in_resource.update_attributes(:uid => access_token[:uid], :name => data.name, :facebook => "facebook.com/#{data.username}")
       user
     else # Create a user with a stub password.
+      p data.name, data["name"]
       User.create!(:email => data.email, :name => data["name"], :password => Devise.friendly_token[0,20])
     end
   end
