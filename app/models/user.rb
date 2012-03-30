@@ -24,8 +24,9 @@ class User < ActiveRecord::Base
     data = access_token.extra.raw_info
     if user = User.where(:email => data.email).first
       user
-    else # Create a user with a stub password. 
-      User.create!(:email => data.email, :name => data.name) 
+    else # Create a user with a stub password.
+      p data
+      User.create!(:email => data.email, :name => data.name)
     end
   end
 
