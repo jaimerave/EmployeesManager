@@ -69,7 +69,7 @@ def login_admin
   page.should have_content("Password")
   fill_in "admin_user_email", with: "admin@example.com"
   fill_in "admin_user_password", with: "password"
-  click_on "Login"
+  click_on "Sign in"
 end
 
 def stub_twitter_calls
